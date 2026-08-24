@@ -1,11 +1,12 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { useMemo, useState } from "react";
-import { CheckCircle2, ChevronRight, Circle, PlayCircle, Search, Timer } from "lucide-react";
+import { CheckCircle2, ChevronRight, PlayCircle, Search, Timer } from "lucide-react";
 import { AppShell } from "@/components/AppShell";
 import { getSubject, questionsFor } from "@/lib/curriculum";
 import { useQuestionPool } from "@/lib/questions";
 import { buildSeries } from "@/lib/testEngine";
-import { toggleChapterDone, useAppState } from "@/lib/store";
+import { useAppState } from "@/lib/store";
+
 import { SubjectIcon } from "@/components/SubjectIcon";
 
 export const Route = createFileRoute("/learn/$subjectId")({
