@@ -6,6 +6,7 @@ import { AppShell } from "@/components/AppShell";
 import { PageHero } from "@/components/PageHero";
 import heroMore from "@/assets/hero-more.webp";
 import { useSession } from "@/lib/auth";
+import { supabase } from "@/lib/supabase";
 import { formatPrice, usePlans, usePremium } from "@/lib/subscription";
 import { confirmCheckout, startCheckout } from "@/lib/payments.functions";
 
@@ -45,10 +46,39 @@ function loadRazorpay(): Promise<boolean> {
   });
 }
 
+type HistoryRow = {
+  id: string;
+  plan_id: string;
+  status: string;
+  amount_paise: number;
+  created_at: string;
+  expires_at: string | null;
+};
+
 function SubscribePage() {
   const { user } = useSession();
   const { plans, loading } = usePlans();
   const { entitlement, subscriptionsEnabled, refresh } = usePremium();
+  const [history, setHistory] = useState<HistoryRow[]>([]);
+
+  useEffect(() => {
+    if (!user) {
+      setHistory([]);
+      return;
+    }
+    let active = true;
+    void supabase
+      .from("subscriptions")
+      .select("id,plan_id,status,amount_paise,created_at,expires_at")
+      .order("created_at", { ascending: false })
+      .limit(10)
+      .then(({ data }) => {
+        if (active) setHistory((data ?? []) as HistoryRow[]);
+      });
+    return () => {
+      active = false;
+    };
+  }, [user, entitlement]);
   const start = useServerFn(startCheckout);
   const confirm = useServerFn(confirmCheckout);
   const [busy, setBusy] = useState<string | null>(null);
@@ -202,6 +232,37 @@ function SubscribePage() {
           </Link>{" "}
           to buy a plan and sync it across devices.
         </p>
+      )}
+
+      {history.length > 0 && (
+        <section className="surface mt-5 p-4">
+          <h2 className="text-sm font-extrabold">Payment history</h2>
+          <ul className="mt-2 divide-y divide-border">
+            {history.map((h) => (
+              <li key={h.id} className="flex items-center justify-between gap-3 py-2">
+                <div className="min-w-0">
+                  <p className="truncate text-xs font-bold capitalize">{h.plan_id.replace(/[-_]/g, " ")}</p>
+                  <p className="text-[11px] text-muted-foreground">
+                    {new Date(h.created_at).toLocaleDateString("en-IN")}
+                    {h.expires_at ? ` · valid till ${new Date(h.expires_at).toLocaleDateString("en-IN")}` : ""}
+                  </p>
+                </div>
+                <div className="text-right">
+                  <p className="text-xs font-bold">{formatPrice(h.amount_paise)}</p>
+                  <p
+                    className={
+                      h.status === "active"
+                        ? "text-[11px] font-bold text-success"
+                        : "text-[11px] font-semibold text-muted-foreground"
+                    }
+                  >
+                    {h.status}
+                  </p>
+                </div>
+              </li>
+            ))}
+          </ul>
+        </section>
       )}
 
       <p className="mt-6 text-center text-[11px] text-muted-foreground">

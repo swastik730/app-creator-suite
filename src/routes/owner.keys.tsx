@@ -11,6 +11,11 @@ export const Route = createFileRoute("/owner/keys")({
 const KEYS = [
   { key: "razorpay_key_id", label: "Razorpay Key ID", hint: "Starts with rzp_live_ or rzp_test_" },
   { key: "razorpay_key_secret", label: "Razorpay Key Secret", hint: "Never shown again after saving" },
+  {
+    key: "razorpay_webhook_secret",
+    label: "Razorpay Webhook Secret",
+    hint: "Set the same secret in Razorpay → Webhooks so plans activate automatically",
+  },
 ] as const;
 
 function OwnerKeysPage() {
@@ -18,6 +23,12 @@ function OwnerKeysPage() {
   const [values, setValues] = useState<Record<string, string>>({});
   const [busy, setBusy] = useState<string | null>(null);
   const [ready, setReady] = useState(false);
+  const [origin, setOrigin] = useState("");
+  const webhookUrl = `${origin || "https://your-app.lovable.app"}/api/public/razorpay-webhook`;
+
+  useEffect(() => {
+    setOrigin(window.location.origin);
+  }, []);
 
   async function load() {
     const [{ data: keys }, { data: paymentsReady }] = await Promise.all([
@@ -93,6 +104,15 @@ function OwnerKeysPage() {
           </div>
         </section>
       ))}
+
+      <section className="surface space-y-2 p-4">
+        <p className="text-sm font-bold">Webhook URL</p>
+        <p className="text-[11px] text-muted-foreground">
+          Paste this in Razorpay → Settings → Webhooks and subscribe to <b>payment.captured</b>, <b>order.paid</b>,{" "}
+          <b>payment.failed</b> and <b>refund.processed</b>.
+        </p>
+        <code className="block break-all rounded-lg bg-muted p-2 text-[11px] font-semibold">{webhookUrl}</code>
+      </section>
 
       <p className="text-[11px] text-muted-foreground">
         Keys are stored privately in the backend and are never sent to the app. Leave a field empty and press Save to

@@ -42,6 +42,7 @@ import { Route as OwnerRolesRouteImport } from './routes/owner.roles'
 import { Route as QuizSubjectIdRouteImport } from './routes/quiz.$subjectId'
 import { Route as TestsIndexRouteImport } from './routes/tests.index'
 import { Route as TestsRunRouteImport } from './routes/tests.run'
+import { Route as ApiPublicRazorpayWebhookRouteImport } from './routes/api/public/razorpay-webhook'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -208,6 +209,12 @@ const TestsRunRoute = TestsRunRouteImport.update({
   path: '/tests/run',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ApiPublicRazorpayWebhookRoute =
+  ApiPublicRazorpayWebhookRouteImport.update({
+    id: '/api/public/razorpay-webhook',
+    path: '/api/public/razorpay-webhook',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -243,6 +250,7 @@ export interface FileRoutesByFullPath {
   '/learn/': typeof LearnIndexRoute
   '/owner/': typeof OwnerIndexRoute
   '/tests/': typeof TestsIndexRoute
+  '/api/public/razorpay-webhook': typeof ApiPublicRazorpayWebhookRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -277,6 +285,7 @@ export interface FileRoutesByTo {
   '/learn': typeof LearnIndexRoute
   '/owner': typeof OwnerIndexRoute
   '/tests': typeof TestsIndexRoute
+  '/api/public/razorpay-webhook': typeof ApiPublicRazorpayWebhookRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -313,6 +322,7 @@ export interface FileRoutesById {
   '/learn/': typeof LearnIndexRoute
   '/owner/': typeof OwnerIndexRoute
   '/tests/': typeof TestsIndexRoute
+  '/api/public/razorpay-webhook': typeof ApiPublicRazorpayWebhookRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -350,6 +360,7 @@ export interface FileRouteTypes {
     | '/learn/'
     | '/owner/'
     | '/tests/'
+    | '/api/public/razorpay-webhook'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -384,6 +395,7 @@ export interface FileRouteTypes {
     | '/learn'
     | '/owner'
     | '/tests'
+    | '/api/public/razorpay-webhook'
   id:
     | '__root__'
     | '/'
@@ -419,6 +431,7 @@ export interface FileRouteTypes {
     | '/learn/'
     | '/owner/'
     | '/tests/'
+    | '/api/public/razorpay-webhook'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -445,6 +458,7 @@ export interface RootRouteChildren {
   TestsRunRoute: typeof TestsRunRoute
   LearnIndexRoute: typeof LearnIndexRoute
   TestsIndexRoute: typeof TestsIndexRoute
+  ApiPublicRazorpayWebhookRoute: typeof ApiPublicRazorpayWebhookRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -680,6 +694,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof TestsRunRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/public/razorpay-webhook': {
+      id: '/api/public/razorpay-webhook'
+      path: '/api/public/razorpay-webhook'
+      fullPath: '/api/public/razorpay-webhook'
+      preLoaderRoute: typeof ApiPublicRazorpayWebhookRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -735,6 +756,7 @@ const rootRouteChildren: RootRouteChildren = {
   TestsRunRoute: TestsRunRoute,
   LearnIndexRoute: LearnIndexRoute,
   TestsIndexRoute: TestsIndexRoute,
+  ApiPublicRazorpayWebhookRoute: ApiPublicRazorpayWebhookRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

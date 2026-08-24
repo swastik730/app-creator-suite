@@ -39,6 +39,17 @@ function OwnerErrors() {
     void load();
   }, [load]);
 
+  const now = Date.now();
+  const last24 = rows.filter((r) => now - new Date(r.created_at).getTime() < 86_400_000).length;
+  const last7d = rows.filter((r) => now - new Date(r.created_at).getTime() < 7 * 86_400_000).length;
+  const grouped = Object.values(
+    rows.reduce<Record<string, { message: string; count: number }>>((acc, r) => {
+      const key = r.message.slice(0, 120);
+      acc[key] = { message: key, count: (acc[key]?.count ?? 0) + 1 };
+      return acc;
+    }, {}),
+  ).sort((a, b) => b.count - a.count);
+
   async function clearAll() {
     const { error } = await supabase.from("error_logs").delete().neq("id", "00000000-0000-0000-0000-000000000000");
     if (error) {
@@ -80,6 +91,37 @@ function OwnerErrors() {
           </button>
         </div>
       </div>
+
+      {!loading && rows.length > 0 && (
+        <>
+          <div className="grid grid-cols-3 gap-2">
+            {[
+              { label: "Last 24h", value: last24 },
+              { label: "Last 7 days", value: last7d },
+              { label: "Unique issues", value: grouped.length },
+            ].map((s) => (
+              <div key={s.label} className="surface p-3 text-center">
+                <p className="text-lg font-extrabold leading-none">{s.value}</p>
+                <p className="mt-1 text-[11px] font-semibold text-muted-foreground">{s.label}</p>
+              </div>
+            ))}
+          </div>
+
+          <section className="surface p-4">
+            <p className="text-sm font-bold">Top issues</p>
+            <ul className="mt-2 space-y-1.5">
+              {grouped.slice(0, 5).map((g) => (
+                <li key={g.message} className="flex items-start justify-between gap-3 text-xs">
+                  <span className="min-w-0 flex-1 truncate font-medium">{g.message}</span>
+                  <span className="shrink-0 rounded-full bg-destructive/12 px-2 py-0.5 font-bold text-destructive">
+                    {g.count}×
+                  </span>
+                </li>
+              ))}
+            </ul>
+          </section>
+        </>
+      )}
 
       {loading ? (
         <p className="flex items-center justify-center gap-2 py-10 text-sm text-muted-foreground">
