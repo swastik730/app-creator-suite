@@ -39,6 +39,17 @@ function OwnerErrors() {
     void load();
   }, [load]);
 
+  const now = Date.now();
+  const last24 = rows.filter((r) => now - new Date(r.created_at).getTime() < 86_400_000).length;
+  const last7d = rows.filter((r) => now - new Date(r.created_at).getTime() < 7 * 86_400_000).length;
+  const grouped = Object.values(
+    rows.reduce<Record<string, { message: string; count: number }>>((acc, r) => {
+      const key = r.message.slice(0, 120);
+      acc[key] = { message: key, count: (acc[key]?.count ?? 0) + 1 };
+      return acc;
+    }, {}),
+  ).sort((a, b) => b.count - a.count);
+
   async function clearAll() {
     const { error } = await supabase.from("error_logs").delete().neq("id", "00000000-0000-0000-0000-000000000000");
     if (error) {
