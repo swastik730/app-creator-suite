@@ -172,6 +172,15 @@ function bumpStreak(s: AppState): Pick<AppState, "streak" | "lastStudyDate"> {
 
 export function recordAttempt(attempt: Omit<Attempt, "id" | "date">) {
   const full: Attempt = { ...attempt, id: crypto.randomUUID(), date: new Date().toISOString() };
+  // A chapter counts as covered once the student has practised it and got at
+  // least half of the questions right — there is no manual tick button.
+  const chapterId = attempt.chapterId;
+  const earnsChapter =
+    !!chapterId &&
+    attempt.total > 0 &&
+    attempt.correct * 2 >= attempt.total &&
+    !state.completedChapters.includes(chapterId);
+
   update((s) => {
     const today = todayKey();
     const sameDay = s.todayDate === today;
@@ -180,11 +189,15 @@ export function recordAttempt(attempt: Omit<Attempt, "id" | "date">) {
       xp: s.xp + attempt.correct * 10 + 5,
       todayDate: today,
       todayCount: (sameDay ? s.todayCount : 0) + attempt.total,
+      completedChapters:
+        earnsChapter && chapterId ? [chapterId, ...s.completedChapters] : s.completedChapters,
       ...bumpStreak(s),
     };
   });
   sink?.onAttempt(full);
+  if (earnsChapter && chapterId) sink?.onChapter(chapterId, true);
 }
+
 
 export function toggleBookmark(questionId: string) {
   const added = !state.bookmarks.includes(questionId);
