@@ -99,6 +99,15 @@ function OwnerKeysPage() {
         </section>
       ))}
 
+      <section className="surface space-y-2 p-4">
+        <p className="text-sm font-bold">Webhook URL</p>
+        <p className="text-[11px] text-muted-foreground">
+          Paste this in Razorpay → Settings → Webhooks and subscribe to <b>payment.captured</b>, <b>order.paid</b>,{" "}
+          <b>payment.failed</b> and <b>refund.processed</b>.
+        </p>
+        <code className="block break-all rounded-lg bg-muted p-2 text-[11px] font-semibold">{webhookUrl}</code>
+      </section>
+
       <p className="text-[11px] text-muted-foreground">
         Keys are stored privately in the backend and are never sent to the app. Leave a field empty and press Save to
         delete a key.
