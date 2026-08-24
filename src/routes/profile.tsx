@@ -9,6 +9,8 @@ import { signOut, useSession } from "@/lib/auth";
 import { AVATARS } from "@/lib/avatars";
 import { PageHero } from "@/components/PageHero";
 import heroProfile from "@/assets/hero-profile.webp";
+import { VerifiedBadge } from "@/components/VerifiedBadge";
+import { usePremium } from "@/lib/subscription";
 
 export const Route = createFileRoute("/profile")({
   head: () => ({
@@ -41,6 +43,7 @@ function Profile() {
   }, []);
 
   const { isOwner } = useRoles();
+  const { subscriptionsEnabled, entitlement, isMax } = usePremium();
 
   return (
     <AppShell title="Profile">
@@ -71,7 +74,10 @@ function Profile() {
           </span>
         )}
         <div className="min-w-0 flex-1">
-          <p className="truncate text-lg font-extrabold">{state.name}</p>
+          <p className="flex items-center gap-1.5 text-lg font-extrabold">
+            <span className="truncate">{state.name}</span>
+            {isMax && <VerifiedBadge className="h-5 w-5 text-white" />}
+          </p>
           <p className="text-xs opacity-85">Class 10 · 2027 Batch</p>
           <div className="mt-2 flex flex-wrap gap-1.5">
             <span className="rounded-full bg-white/15 px-2.5 py-0.5 text-[11px] font-bold">
