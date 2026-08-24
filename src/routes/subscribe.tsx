@@ -234,6 +234,37 @@ function SubscribePage() {
         </p>
       )}
 
+      {history.length > 0 && (
+        <section className="surface mt-5 p-4">
+          <h2 className="text-sm font-extrabold">Payment history</h2>
+          <ul className="mt-2 divide-y divide-border">
+            {history.map((h) => (
+              <li key={h.id} className="flex items-center justify-between gap-3 py-2">
+                <div className="min-w-0">
+                  <p className="truncate text-xs font-bold capitalize">{h.plan_id.replace(/[-_]/g, " ")}</p>
+                  <p className="text-[11px] text-muted-foreground">
+                    {new Date(h.created_at).toLocaleDateString("en-IN")}
+                    {h.expires_at ? ` · valid till ${new Date(h.expires_at).toLocaleDateString("en-IN")}` : ""}
+                  </p>
+                </div>
+                <div className="text-right">
+                  <p className="text-xs font-bold">{formatPrice(h.amount_paise)}</p>
+                  <p
+                    className={
+                      h.status === "active"
+                        ? "text-[11px] font-bold text-success"
+                        : "text-[11px] font-semibold text-muted-foreground"
+                    }
+                  >
+                    {h.status}
+                  </p>
+                </div>
+              </li>
+            ))}
+          </ul>
+        </section>
+      )}
+
       <p className="mt-6 text-center text-[11px] text-muted-foreground">
         Payments are processed securely by Razorpay. Plans do not auto-renew.
       </p>
