@@ -79,6 +79,30 @@ export function AppShell({ children, title }: { children: ReactNode; title?: str
               {theme === "dark" ? <Sun className="h-[18px] w-[18px]" /> : <Moon className="h-[18px] w-[18px]" />}
             </button>
             <Link
+              to="/tutor"
+              preload="render"
+              aria-label="AI doubt tutor"
+              className="hidden h-9 w-9 place-items-center rounded-full text-muted-foreground transition-colors hover:bg-muted hover:text-foreground sm:grid"
+            >
+              <GraduationCap className="h-[18px] w-[18px]" />
+            </Link>
+            <Link
+              to="/models"
+              preload="render"
+              aria-label="3D science models"
+              className="hidden h-9 w-9 place-items-center rounded-full text-muted-foreground transition-colors hover:bg-muted hover:text-foreground sm:grid"
+            >
+              <Boxes className="h-[18px] w-[18px]" />
+            </Link>
+            <Link
+              to="/subscribe"
+              preload="render"
+              aria-label="Plans and pricing"
+              className="grid h-9 w-9 place-items-center rounded-full text-hero-amber transition-colors hover:bg-muted"
+            >
+              <Sparkles className="h-[18px] w-[18px]" />
+            </Link>
+            <Link
               to="/notifications"
               preload="render"
               aria-label="Notifications"
@@ -86,6 +110,7 @@ export function AppShell({ children, title }: { children: ReactNode; title?: str
             >
               <Bell className="h-[18px] w-[18px]" />
             </Link>
+
             <Link
               to="/profile"
               preload="render"
