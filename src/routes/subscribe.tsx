@@ -6,6 +6,7 @@ import { AppShell } from "@/components/AppShell";
 import { PageHero } from "@/components/PageHero";
 import heroMore from "@/assets/hero-more.webp";
 import { useSession } from "@/lib/auth";
+import { supabase } from "@/lib/supabase";
 import { formatPrice, usePlans, usePremium } from "@/lib/subscription";
 import { confirmCheckout, startCheckout } from "@/lib/payments.functions";
 
