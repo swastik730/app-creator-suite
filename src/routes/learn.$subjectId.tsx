@@ -151,19 +151,8 @@ function SubjectPage() {
           return (
             <article key={c.id} className="surface p-4">
               <div className="flex items-start gap-3">
-                <button
-                  type="button"
-                  onClick={() => toggleChapterDone(c.id)}
-                  aria-label={complete ? "Mark chapter as pending" : "Mark chapter as done"}
-                  className="mt-0.5 shrink-0"
-                >
-                  {complete ? (
-                    <CheckCircle2 className="h-5 w-5 text-success" />
-                  ) : (
-                    <Circle className="h-5 w-5 text-muted-foreground" />
-                  )}
-                </button>
                 <div className="min-w-0 flex-1">
+
                   <p className="text-[11px] font-bold uppercase tracking-wide text-muted-foreground">
                     Chapter {i + 1}
                   </p>
