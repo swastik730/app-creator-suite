@@ -99,7 +99,7 @@ function ProgressPage() {
           <div className="brand-gradient h-full rounded-full transition-all" style={{ width: `${syllabus}%` }} />
         </div>
         <p className="mt-2 text-xs text-muted-foreground">
-          {state.completedChapters.length} of {TOTAL_CHAPTERS} chapters marked complete
+          {state.completedChapters.length} of {TOTAL_CHAPTERS} chapters covered
         </p>
       </div>
 
