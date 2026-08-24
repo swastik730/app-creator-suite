@@ -23,6 +23,12 @@ function OwnerKeysPage() {
   const [values, setValues] = useState<Record<string, string>>({});
   const [busy, setBusy] = useState<string | null>(null);
   const [ready, setReady] = useState(false);
+  const [origin, setOrigin] = useState("");
+  const webhookUrl = `${origin || "https://your-app.lovable.app"}/api/public/razorpay-webhook`;
+
+  useEffect(() => {
+    setOrigin(window.location.origin);
+  }, []);
 
   async function load() {
     const [{ data: keys }, { data: paymentsReady }] = await Promise.all([
