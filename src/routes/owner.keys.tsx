@@ -11,6 +11,11 @@ export const Route = createFileRoute("/owner/keys")({
 const KEYS = [
   { key: "razorpay_key_id", label: "Razorpay Key ID", hint: "Starts with rzp_live_ or rzp_test_" },
   { key: "razorpay_key_secret", label: "Razorpay Key Secret", hint: "Never shown again after saving" },
+  {
+    key: "razorpay_webhook_secret",
+    label: "Razorpay Webhook Secret",
+    hint: "Set the same secret in Razorpay → Webhooks so plans activate automatically",
+  },
 ] as const;
 
 function OwnerKeysPage() {
