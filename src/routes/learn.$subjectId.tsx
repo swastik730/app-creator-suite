@@ -152,11 +152,18 @@ function SubjectPage() {
             <article key={c.id} className="surface p-4">
               <div className="flex items-start gap-3">
                 <div className="min-w-0 flex-1">
-
-                  <p className="text-[11px] font-bold uppercase tracking-wide text-muted-foreground">
-                    Chapter {i + 1}
-                  </p>
+                  <div className="flex items-center gap-2">
+                    <p className="text-[11px] font-bold uppercase tracking-wide text-muted-foreground">
+                      Chapter {i + 1}
+                    </p>
+                    {complete && (
+                      <span className="inline-flex items-center gap-1 rounded-full bg-success-soft px-2 py-0.5 text-[10px] font-bold text-success">
+                        <CheckCircle2 className="h-3 w-3" /> Covered
+                      </span>
+                    )}
+                  </div>
                   <h2 className="text-sm font-bold leading-tight">{c.name}</h2>
+
                   <div className="mt-2 flex flex-wrap gap-1.5">
                     {c.topics.map((t) => (
                       <span key={t} className="rounded-full bg-muted px-2.5 py-1 text-[11px] font-medium text-muted-foreground">
