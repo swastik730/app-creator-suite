@@ -1,8 +1,9 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import {
-
-  Crown,
+  Boxes,
+  ChevronRight,
   Download,
+  GraduationCap,
   HelpCircle,
   Info,
   LayoutGrid,
@@ -12,12 +13,14 @@ import {
 } from "lucide-react";
 import { AppShell } from "@/components/AppShell";
 import { PageHero } from "@/components/PageHero";
+import { SubscriptionCard } from "@/components/SubscriptionCard";
 import heroMore from "@/assets/hero-more.webp";
 import tileNcert from "@/assets/tiles/ncert.webp";
 import tileAnalysis from "@/assets/tiles/analysis.webp";
 import tileCalendar from "@/assets/tiles/calendar.webp";
 import tileTrophy from "@/assets/tiles/trophy.webp";
 import tileLeaderboard from "@/assets/tiles/leaderboard.webp";
+
 
 export const Route = createFileRoute("/more")({
   head: () => ({
