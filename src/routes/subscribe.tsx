@@ -45,10 +45,39 @@ function loadRazorpay(): Promise<boolean> {
   });
 }
 
+type HistoryRow = {
+  id: string;
+  plan_id: string;
+  status: string;
+  amount_paise: number;
+  created_at: string;
+  expires_at: string | null;
+};
+
 function SubscribePage() {
   const { user } = useSession();
   const { plans, loading } = usePlans();
   const { entitlement, subscriptionsEnabled, refresh } = usePremium();
+  const [history, setHistory] = useState<HistoryRow[]>([]);
+
+  useEffect(() => {
+    if (!user) {
+      setHistory([]);
+      return;
+    }
+    let active = true;
+    void supabase
+      .from("subscriptions")
+      .select("id,plan_id,status,amount_paise,created_at,expires_at")
+      .order("created_at", { ascending: false })
+      .limit(10)
+      .then(({ data }) => {
+        if (active) setHistory((data ?? []) as HistoryRow[]);
+      });
+    return () => {
+      active = false;
+    };
+  }, [user, entitlement]);
   const start = useServerFn(startCheckout);
   const confirm = useServerFn(confirmCheckout);
   const [busy, setBusy] = useState<string | null>(null);
