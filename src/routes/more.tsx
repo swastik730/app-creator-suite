@@ -100,17 +100,8 @@ function MorePage() {
         tint="purple"
       />
 
-      <div className="surface mb-5 flex items-center gap-4 p-5">
-        <span className="grid h-11 w-11 shrink-0 place-items-center rounded-2xl bg-success-soft text-success">
-          <Crown className="h-6 w-6" />
-        </span>
-        <div className="min-w-0 flex-1">
-          <p className="text-base font-extrabold">Everything is free</p>
-          <p className="text-xs text-muted-foreground">
-            All tests, analytics and solutions unlocked — no subscription, ever.
-          </p>
-        </div>
-      </div>
+      <SubscriptionCard className="mb-5" />
+
 
 
       <h2 className="mb-3 flex items-center gap-2 text-sm font-bold">
