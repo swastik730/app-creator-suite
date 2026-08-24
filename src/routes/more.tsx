@@ -78,6 +78,31 @@ const TOOLS = [
   },
 ] as const;
 
+const PREMIUM = [
+  {
+    to: "/models",
+    icon: Boxes,
+    label: "3D Science Models",
+    hint: "Rotate cells, atoms and circuits",
+    chip: "bg-hero-purple/18 text-hero-purple",
+  },
+  {
+    to: "/tutor",
+    icon: GraduationCap,
+    label: "AI Doubt Tutor",
+    hint: "Ask any Class 10 doubt, any time",
+    chip: "bg-primary/15 text-primary",
+  },
+  {
+    to: "/subscribe",
+    icon: Sparkles,
+    label: "Plans & Pricing",
+    hint: "See what premium unlocks",
+    chip: "bg-hero-amber/20 text-hero-amber",
+  },
+] as const;
+
+
 const RESOURCES = [
   { icon: Download, label: "Downloads", hint: "Saved notes & offline content", chip: "bg-primary/15 text-primary" },
   { icon: Lightbulb, label: "Study Tips", hint: "Smart board exam strategies", chip: "bg-hero-amber/20 text-hero-amber" },
