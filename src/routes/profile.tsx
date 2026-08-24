@@ -294,15 +294,29 @@ function Profile() {
           <span className="flex-1 text-sm font-semibold">Leaderboard</span>
           <ChevronRight className="h-4 w-4 text-muted-foreground" />
         </Link>
-        <div className="flex items-center gap-3 px-5 py-4">
-          <span className="grid h-9 w-9 shrink-0 place-items-center rounded-xl bg-success-soft text-success">
+        <Link to="/subscribe" className="flex items-center gap-3 px-5 py-4">
+          <span
+            className={`grid h-9 w-9 shrink-0 place-items-center rounded-xl ${
+              isMax ? "bg-primary/15 text-primary" : "bg-success-soft text-success"
+            }`}
+          >
             <Crown className="h-4 w-4" />
           </span>
-          <span className="flex-1 text-sm font-semibold">Everything unlocked</span>
-          <span className="rounded-full bg-success-soft px-2.5 py-1 text-[11px] font-bold text-success">
-            Free forever
+          <span className="flex-1 text-sm font-semibold">Subscription</span>
+          <span
+            className={`rounded-full px-2.5 py-1 text-[11px] font-bold ${
+              !subscriptionsEnabled
+                ? "bg-success-soft text-success"
+                : entitlement
+                  ? "bg-primary/15 text-primary"
+                  : "bg-muted text-muted-foreground"
+            }`}
+          >
+            {!subscriptionsEnabled ? "All unlocked" : isMax ? "Max Pro" : entitlement ? "Premium" : "Not active"}
           </span>
-        </div>
+          <ChevronRight className="h-4 w-4 text-muted-foreground" />
+        </Link>
+
 
         {isOwner && (
           <Link to="/owner" className="flex items-center gap-3 px-5 py-4">
