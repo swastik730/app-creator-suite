@@ -105,6 +105,27 @@ function MorePage() {
 
       <SubscriptionCard className="mb-5" />
 
+      <h2 className="mb-3 flex items-center gap-2 text-sm font-bold">
+        <span className="h-4 w-1 rounded-full bg-hero-purple" />
+        Premium
+      </h2>
+      <div className="surface mb-6 divide-y divide-border">
+        {PREMIUM.map(({ to, icon: Icon, label, hint, chip }) => (
+          <Link key={to} to={to} className="flex items-center gap-3 px-4 py-3.5">
+            <span className={`grid h-10 w-10 shrink-0 place-items-center rounded-2xl ${chip}`}>
+              <Icon className="h-5 w-5" />
+            </span>
+            <div className="min-w-0 flex-1">
+              <p className="truncate text-sm font-bold">{label}</p>
+              <p className="truncate text-[11px] text-muted-foreground">{hint}</p>
+            </div>
+            <ChevronRight className="h-4 w-4 shrink-0 text-muted-foreground" />
+          </Link>
+        ))}
+      </div>
+
+
+
 
 
       <h2 className="mb-3 flex items-center gap-2 text-sm font-bold">
