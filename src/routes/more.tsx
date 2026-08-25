@@ -4,6 +4,7 @@ import {
   ChevronRight,
   Download,
   GraduationCap,
+  Headset,
   HelpCircle,
   Info,
   LayoutGrid,
