@@ -40,6 +40,7 @@ import { Route as OwnerModelsRouteImport } from './routes/owner.models'
 import { Route as OwnerNcertRouteImport } from './routes/owner.ncert'
 import { Route as OwnerPlansRouteImport } from './routes/owner.plans'
 import { Route as OwnerRolesRouteImport } from './routes/owner.roles'
+import { Route as OwnerSupportRouteImport } from './routes/owner.support'
 import { Route as QuizSubjectIdRouteImport } from './routes/quiz.$subjectId'
 import { Route as TestsIndexRouteImport } from './routes/tests.index'
 import { Route as TestsRunRouteImport } from './routes/tests.run'
@@ -200,6 +201,11 @@ const OwnerRolesRoute = OwnerRolesRouteImport.update({
   path: '/roles',
   getParentRoute: () => OwnerRoute,
 } as any)
+const OwnerSupportRoute = OwnerSupportRouteImport.update({
+  id: '/support',
+  path: '/support',
+  getParentRoute: () => OwnerRoute,
+} as any)
 const QuizSubjectIdRoute = QuizSubjectIdRouteImport.update({
   id: '/quiz/$subjectId',
   path: '/quiz/$subjectId',
@@ -252,6 +258,7 @@ export interface FileRoutesByFullPath {
   '/owner/ncert': typeof OwnerNcertRoute
   '/owner/plans': typeof OwnerPlansRoute
   '/owner/roles': typeof OwnerRolesRoute
+  '/owner/support': typeof OwnerSupportRoute
   '/quiz/$subjectId': typeof QuizSubjectIdRoute
   '/tests/run': typeof TestsRunRoute
   '/learn/': typeof LearnIndexRoute
@@ -288,6 +295,7 @@ export interface FileRoutesByTo {
   '/owner/ncert': typeof OwnerNcertRoute
   '/owner/plans': typeof OwnerPlansRoute
   '/owner/roles': typeof OwnerRolesRoute
+  '/owner/support': typeof OwnerSupportRoute
   '/quiz/$subjectId': typeof QuizSubjectIdRoute
   '/tests/run': typeof TestsRunRoute
   '/learn': typeof LearnIndexRoute
@@ -326,6 +334,7 @@ export interface FileRoutesById {
   '/owner/ncert': typeof OwnerNcertRoute
   '/owner/plans': typeof OwnerPlansRoute
   '/owner/roles': typeof OwnerRolesRoute
+  '/owner/support': typeof OwnerSupportRoute
   '/quiz/$subjectId': typeof QuizSubjectIdRoute
   '/tests/run': typeof TestsRunRoute
   '/learn/': typeof LearnIndexRoute
@@ -365,6 +374,7 @@ export interface FileRouteTypes {
     | '/owner/ncert'
     | '/owner/plans'
     | '/owner/roles'
+    | '/owner/support'
     | '/quiz/$subjectId'
     | '/tests/run'
     | '/learn/'
@@ -401,6 +411,7 @@ export interface FileRouteTypes {
     | '/owner/ncert'
     | '/owner/plans'
     | '/owner/roles'
+    | '/owner/support'
     | '/quiz/$subjectId'
     | '/tests/run'
     | '/learn'
@@ -438,6 +449,7 @@ export interface FileRouteTypes {
     | '/owner/ncert'
     | '/owner/plans'
     | '/owner/roles'
+    | '/owner/support'
     | '/quiz/$subjectId'
     | '/tests/run'
     | '/learn/'
@@ -693,6 +705,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof OwnerRolesRouteImport
       parentRoute: typeof OwnerRoute
     }
+    '/owner/support': {
+      id: '/owner/support'
+      path: '/support'
+      fullPath: '/owner/support'
+      preLoaderRoute: typeof OwnerSupportRouteImport
+      parentRoute: typeof OwnerRoute
+    }
     '/quiz/$subjectId': {
       id: '/quiz/$subjectId'
       path: '/quiz/$subjectId'
@@ -734,6 +753,7 @@ interface OwnerRouteChildren {
   OwnerNcertRoute: typeof OwnerNcertRoute
   OwnerPlansRoute: typeof OwnerPlansRoute
   OwnerRolesRoute: typeof OwnerRolesRoute
+  OwnerSupportRoute: typeof OwnerSupportRoute
   OwnerIndexRoute: typeof OwnerIndexRoute
 }
 
@@ -747,6 +767,7 @@ const OwnerRouteChildren: OwnerRouteChildren = {
   OwnerNcertRoute: OwnerNcertRoute,
   OwnerPlansRoute: OwnerPlansRoute,
   OwnerRolesRoute: OwnerRolesRoute,
+  OwnerSupportRoute: OwnerSupportRoute,
   OwnerIndexRoute: OwnerIndexRoute,
 }
 
