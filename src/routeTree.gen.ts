@@ -17,7 +17,6 @@ import { Route as BookmarksRouteImport } from './routes/bookmarks'
 import { Route as CalendarRouteImport } from './routes/calendar'
 import { Route as LeaderboardRouteImport } from './routes/leaderboard'
 import { Route as ModelsRouteImport } from './routes/models'
-import { Route as MoreRouteImport } from './routes/more'
 import { Route as NcertRouteImport } from './routes/ncert'
 import { Route as NotificationsRouteImport } from './routes/notifications'
 import { Route as OwnerRouteImport } from './routes/owner'
@@ -26,6 +25,7 @@ import { Route as ProfileRouteImport } from './routes/profile'
 import { Route as ProgressRouteImport } from './routes/progress'
 import { Route as ResetPasswordRouteImport } from './routes/reset-password'
 import { Route as SubscribeRouteImport } from './routes/subscribe'
+import { Route as SupportRouteImport } from './routes/support'
 import { Route as TutorRouteImport } from './routes/tutor'
 import { Route as LearnIndexRouteImport } from './routes/learn.index'
 import { Route as LearnSubjectIdRouteImport } from './routes/learn.$subjectId'
@@ -39,6 +39,7 @@ import { Route as OwnerModelsRouteImport } from './routes/owner.models'
 import { Route as OwnerNcertRouteImport } from './routes/owner.ncert'
 import { Route as OwnerPlansRouteImport } from './routes/owner.plans'
 import { Route as OwnerRolesRouteImport } from './routes/owner.roles'
+import { Route as OwnerSupportRouteImport } from './routes/owner.support'
 import { Route as QuizSubjectIdRouteImport } from './routes/quiz.$subjectId'
 import { Route as TestsIndexRouteImport } from './routes/tests.index'
 import { Route as TestsRunRouteImport } from './routes/tests.run'
@@ -84,11 +85,6 @@ const ModelsRoute = ModelsRouteImport.update({
   path: '/models',
   getParentRoute: () => rootRouteImport,
 } as any)
-const MoreRoute = MoreRouteImport.update({
-  id: '/more',
-  path: '/more',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const NcertRoute = NcertRouteImport.update({
   id: '/ncert',
   path: '/ncert',
@@ -127,6 +123,11 @@ const ResetPasswordRoute = ResetPasswordRouteImport.update({
 const SubscribeRoute = SubscribeRouteImport.update({
   id: '/subscribe',
   path: '/subscribe',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SupportRoute = SupportRouteImport.update({
+  id: '/support',
+  path: '/support',
   getParentRoute: () => rootRouteImport,
 } as any)
 const TutorRoute = TutorRouteImport.update({
@@ -194,6 +195,11 @@ const OwnerRolesRoute = OwnerRolesRouteImport.update({
   path: '/roles',
   getParentRoute: () => OwnerRoute,
 } as any)
+const OwnerSupportRoute = OwnerSupportRouteImport.update({
+  id: '/support',
+  path: '/support',
+  getParentRoute: () => OwnerRoute,
+} as any)
 const QuizSubjectIdRoute = QuizSubjectIdRouteImport.update({
   id: '/quiz/$subjectId',
   path: '/quiz/$subjectId',
@@ -225,7 +231,6 @@ export interface FileRoutesByFullPath {
   '/calendar': typeof CalendarRoute
   '/leaderboard': typeof LeaderboardRoute
   '/models': typeof ModelsRoute
-  '/more': typeof MoreRoute
   '/ncert': typeof NcertRoute
   '/notifications': typeof NotificationsRoute
   '/owner': typeof OwnerRouteWithChildren
@@ -234,6 +239,7 @@ export interface FileRoutesByFullPath {
   '/progress': typeof ProgressRoute
   '/reset-password': typeof ResetPasswordRoute
   '/subscribe': typeof SubscribeRoute
+  '/support': typeof SupportRoute
   '/tutor': typeof TutorRoute
   '/learn/$subjectId': typeof LearnSubjectIdRoute
   '/owner/ads': typeof OwnerAdsRoute
@@ -245,6 +251,7 @@ export interface FileRoutesByFullPath {
   '/owner/ncert': typeof OwnerNcertRoute
   '/owner/plans': typeof OwnerPlansRoute
   '/owner/roles': typeof OwnerRolesRoute
+  '/owner/support': typeof OwnerSupportRoute
   '/quiz/$subjectId': typeof QuizSubjectIdRoute
   '/tests/run': typeof TestsRunRoute
   '/learn/': typeof LearnIndexRoute
@@ -261,7 +268,6 @@ export interface FileRoutesByTo {
   '/calendar': typeof CalendarRoute
   '/leaderboard': typeof LeaderboardRoute
   '/models': typeof ModelsRoute
-  '/more': typeof MoreRoute
   '/ncert': typeof NcertRoute
   '/notifications': typeof NotificationsRoute
   '/practice': typeof PracticeRoute
@@ -269,6 +275,7 @@ export interface FileRoutesByTo {
   '/progress': typeof ProgressRoute
   '/reset-password': typeof ResetPasswordRoute
   '/subscribe': typeof SubscribeRoute
+  '/support': typeof SupportRoute
   '/tutor': typeof TutorRoute
   '/learn/$subjectId': typeof LearnSubjectIdRoute
   '/owner/ads': typeof OwnerAdsRoute
@@ -280,6 +287,7 @@ export interface FileRoutesByTo {
   '/owner/ncert': typeof OwnerNcertRoute
   '/owner/plans': typeof OwnerPlansRoute
   '/owner/roles': typeof OwnerRolesRoute
+  '/owner/support': typeof OwnerSupportRoute
   '/quiz/$subjectId': typeof QuizSubjectIdRoute
   '/tests/run': typeof TestsRunRoute
   '/learn': typeof LearnIndexRoute
@@ -297,7 +305,6 @@ export interface FileRoutesById {
   '/calendar': typeof CalendarRoute
   '/leaderboard': typeof LeaderboardRoute
   '/models': typeof ModelsRoute
-  '/more': typeof MoreRoute
   '/ncert': typeof NcertRoute
   '/notifications': typeof NotificationsRoute
   '/owner': typeof OwnerRouteWithChildren
@@ -306,6 +313,7 @@ export interface FileRoutesById {
   '/progress': typeof ProgressRoute
   '/reset-password': typeof ResetPasswordRoute
   '/subscribe': typeof SubscribeRoute
+  '/support': typeof SupportRoute
   '/tutor': typeof TutorRoute
   '/learn/$subjectId': typeof LearnSubjectIdRoute
   '/owner/ads': typeof OwnerAdsRoute
@@ -317,6 +325,7 @@ export interface FileRoutesById {
   '/owner/ncert': typeof OwnerNcertRoute
   '/owner/plans': typeof OwnerPlansRoute
   '/owner/roles': typeof OwnerRolesRoute
+  '/owner/support': typeof OwnerSupportRoute
   '/quiz/$subjectId': typeof QuizSubjectIdRoute
   '/tests/run': typeof TestsRunRoute
   '/learn/': typeof LearnIndexRoute
@@ -335,7 +344,6 @@ export interface FileRouteTypes {
     | '/calendar'
     | '/leaderboard'
     | '/models'
-    | '/more'
     | '/ncert'
     | '/notifications'
     | '/owner'
@@ -344,6 +352,7 @@ export interface FileRouteTypes {
     | '/progress'
     | '/reset-password'
     | '/subscribe'
+    | '/support'
     | '/tutor'
     | '/learn/$subjectId'
     | '/owner/ads'
@@ -355,6 +364,7 @@ export interface FileRouteTypes {
     | '/owner/ncert'
     | '/owner/plans'
     | '/owner/roles'
+    | '/owner/support'
     | '/quiz/$subjectId'
     | '/tests/run'
     | '/learn/'
@@ -371,7 +381,6 @@ export interface FileRouteTypes {
     | '/calendar'
     | '/leaderboard'
     | '/models'
-    | '/more'
     | '/ncert'
     | '/notifications'
     | '/practice'
@@ -379,6 +388,7 @@ export interface FileRouteTypes {
     | '/progress'
     | '/reset-password'
     | '/subscribe'
+    | '/support'
     | '/tutor'
     | '/learn/$subjectId'
     | '/owner/ads'
@@ -390,6 +400,7 @@ export interface FileRouteTypes {
     | '/owner/ncert'
     | '/owner/plans'
     | '/owner/roles'
+    | '/owner/support'
     | '/quiz/$subjectId'
     | '/tests/run'
     | '/learn'
@@ -406,7 +417,6 @@ export interface FileRouteTypes {
     | '/calendar'
     | '/leaderboard'
     | '/models'
-    | '/more'
     | '/ncert'
     | '/notifications'
     | '/owner'
@@ -415,6 +425,7 @@ export interface FileRouteTypes {
     | '/progress'
     | '/reset-password'
     | '/subscribe'
+    | '/support'
     | '/tutor'
     | '/learn/$subjectId'
     | '/owner/ads'
@@ -426,6 +437,7 @@ export interface FileRouteTypes {
     | '/owner/ncert'
     | '/owner/plans'
     | '/owner/roles'
+    | '/owner/support'
     | '/quiz/$subjectId'
     | '/tests/run'
     | '/learn/'
@@ -443,7 +455,6 @@ export interface RootRouteChildren {
   CalendarRoute: typeof CalendarRoute
   LeaderboardRoute: typeof LeaderboardRoute
   ModelsRoute: typeof ModelsRoute
-  MoreRoute: typeof MoreRoute
   NcertRoute: typeof NcertRoute
   NotificationsRoute: typeof NotificationsRoute
   OwnerRoute: typeof OwnerRouteWithChildren
@@ -452,6 +463,7 @@ export interface RootRouteChildren {
   ProgressRoute: typeof ProgressRoute
   ResetPasswordRoute: typeof ResetPasswordRoute
   SubscribeRoute: typeof SubscribeRoute
+  SupportRoute: typeof SupportRoute
   TutorRoute: typeof TutorRoute
   LearnSubjectIdRoute: typeof LearnSubjectIdRoute
   QuizSubjectIdRoute: typeof QuizSubjectIdRoute
@@ -519,13 +531,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ModelsRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/more': {
-      id: '/more'
-      path: '/more'
-      fullPath: '/more'
-      preLoaderRoute: typeof MoreRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/ncert': {
       id: '/ncert'
       path: '/ncert'
@@ -580,6 +585,13 @@ declare module '@tanstack/react-router' {
       path: '/subscribe'
       fullPath: '/subscribe'
       preLoaderRoute: typeof SubscribeRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/support': {
+      id: '/support'
+      path: '/support'
+      fullPath: '/support'
+      preLoaderRoute: typeof SupportRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/tutor': {
@@ -673,6 +685,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof OwnerRolesRouteImport
       parentRoute: typeof OwnerRoute
     }
+    '/owner/support': {
+      id: '/owner/support'
+      path: '/support'
+      fullPath: '/owner/support'
+      preLoaderRoute: typeof OwnerSupportRouteImport
+      parentRoute: typeof OwnerRoute
+    }
     '/quiz/$subjectId': {
       id: '/quiz/$subjectId'
       path: '/quiz/$subjectId'
@@ -714,6 +733,7 @@ interface OwnerRouteChildren {
   OwnerNcertRoute: typeof OwnerNcertRoute
   OwnerPlansRoute: typeof OwnerPlansRoute
   OwnerRolesRoute: typeof OwnerRolesRoute
+  OwnerSupportRoute: typeof OwnerSupportRoute
   OwnerIndexRoute: typeof OwnerIndexRoute
 }
 
@@ -727,6 +747,7 @@ const OwnerRouteChildren: OwnerRouteChildren = {
   OwnerNcertRoute: OwnerNcertRoute,
   OwnerPlansRoute: OwnerPlansRoute,
   OwnerRolesRoute: OwnerRolesRoute,
+  OwnerSupportRoute: OwnerSupportRoute,
   OwnerIndexRoute: OwnerIndexRoute,
 }
 
@@ -741,7 +762,6 @@ const rootRouteChildren: RootRouteChildren = {
   CalendarRoute: CalendarRoute,
   LeaderboardRoute: LeaderboardRoute,
   ModelsRoute: ModelsRoute,
-  MoreRoute: MoreRoute,
   NcertRoute: NcertRoute,
   NotificationsRoute: NotificationsRoute,
   OwnerRoute: OwnerRouteWithChildren,
@@ -750,6 +770,7 @@ const rootRouteChildren: RootRouteChildren = {
   ProgressRoute: ProgressRoute,
   ResetPasswordRoute: ResetPasswordRoute,
   SubscribeRoute: SubscribeRoute,
+  SupportRoute: SupportRoute,
   TutorRoute: TutorRoute,
   LearnSubjectIdRoute: LearnSubjectIdRoute,
   QuizSubjectIdRoute: QuizSubjectIdRoute,
