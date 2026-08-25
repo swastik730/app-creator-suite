@@ -26,6 +26,7 @@ import { Route as ProfileRouteImport } from './routes/profile'
 import { Route as ProgressRouteImport } from './routes/progress'
 import { Route as ResetPasswordRouteImport } from './routes/reset-password'
 import { Route as SubscribeRouteImport } from './routes/subscribe'
+import { Route as SupportRouteImport } from './routes/support'
 import { Route as TutorRouteImport } from './routes/tutor'
 import { Route as LearnIndexRouteImport } from './routes/learn.index'
 import { Route as LearnSubjectIdRouteImport } from './routes/learn.$subjectId'
@@ -127,6 +128,11 @@ const ResetPasswordRoute = ResetPasswordRouteImport.update({
 const SubscribeRoute = SubscribeRouteImport.update({
   id: '/subscribe',
   path: '/subscribe',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SupportRoute = SupportRouteImport.update({
+  id: '/support',
+  path: '/support',
   getParentRoute: () => rootRouteImport,
 } as any)
 const TutorRoute = TutorRouteImport.update({
@@ -234,6 +240,7 @@ export interface FileRoutesByFullPath {
   '/progress': typeof ProgressRoute
   '/reset-password': typeof ResetPasswordRoute
   '/subscribe': typeof SubscribeRoute
+  '/support': typeof SupportRoute
   '/tutor': typeof TutorRoute
   '/learn/$subjectId': typeof LearnSubjectIdRoute
   '/owner/ads': typeof OwnerAdsRoute
@@ -269,6 +276,7 @@ export interface FileRoutesByTo {
   '/progress': typeof ProgressRoute
   '/reset-password': typeof ResetPasswordRoute
   '/subscribe': typeof SubscribeRoute
+  '/support': typeof SupportRoute
   '/tutor': typeof TutorRoute
   '/learn/$subjectId': typeof LearnSubjectIdRoute
   '/owner/ads': typeof OwnerAdsRoute
@@ -306,6 +314,7 @@ export interface FileRoutesById {
   '/progress': typeof ProgressRoute
   '/reset-password': typeof ResetPasswordRoute
   '/subscribe': typeof SubscribeRoute
+  '/support': typeof SupportRoute
   '/tutor': typeof TutorRoute
   '/learn/$subjectId': typeof LearnSubjectIdRoute
   '/owner/ads': typeof OwnerAdsRoute
@@ -344,6 +353,7 @@ export interface FileRouteTypes {
     | '/progress'
     | '/reset-password'
     | '/subscribe'
+    | '/support'
     | '/tutor'
     | '/learn/$subjectId'
     | '/owner/ads'
@@ -379,6 +389,7 @@ export interface FileRouteTypes {
     | '/progress'
     | '/reset-password'
     | '/subscribe'
+    | '/support'
     | '/tutor'
     | '/learn/$subjectId'
     | '/owner/ads'
@@ -415,6 +426,7 @@ export interface FileRouteTypes {
     | '/progress'
     | '/reset-password'
     | '/subscribe'
+    | '/support'
     | '/tutor'
     | '/learn/$subjectId'
     | '/owner/ads'
@@ -452,6 +464,7 @@ export interface RootRouteChildren {
   ProgressRoute: typeof ProgressRoute
   ResetPasswordRoute: typeof ResetPasswordRoute
   SubscribeRoute: typeof SubscribeRoute
+  SupportRoute: typeof SupportRoute
   TutorRoute: typeof TutorRoute
   LearnSubjectIdRoute: typeof LearnSubjectIdRoute
   QuizSubjectIdRoute: typeof QuizSubjectIdRoute
@@ -580,6 +593,13 @@ declare module '@tanstack/react-router' {
       path: '/subscribe'
       fullPath: '/subscribe'
       preLoaderRoute: typeof SubscribeRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/support': {
+      id: '/support'
+      path: '/support'
+      fullPath: '/support'
+      preLoaderRoute: typeof SupportRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/tutor': {
@@ -750,6 +770,7 @@ const rootRouteChildren: RootRouteChildren = {
   ProgressRoute: ProgressRoute,
   ResetPasswordRoute: ResetPasswordRoute,
   SubscribeRoute: SubscribeRoute,
+  SupportRoute: SupportRoute,
   TutorRoute: TutorRoute,
   LearnSubjectIdRoute: LearnSubjectIdRoute,
   QuizSubjectIdRoute: QuizSubjectIdRoute,
