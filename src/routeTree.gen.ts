@@ -17,7 +17,6 @@ import { Route as BookmarksRouteImport } from './routes/bookmarks'
 import { Route as CalendarRouteImport } from './routes/calendar'
 import { Route as LeaderboardRouteImport } from './routes/leaderboard'
 import { Route as ModelsRouteImport } from './routes/models'
-import { Route as MoreRouteImport } from './routes/more'
 import { Route as NcertRouteImport } from './routes/ncert'
 import { Route as NotificationsRouteImport } from './routes/notifications'
 import { Route as OwnerRouteImport } from './routes/owner'
@@ -84,11 +83,6 @@ const LeaderboardRoute = LeaderboardRouteImport.update({
 const ModelsRoute = ModelsRouteImport.update({
   id: '/models',
   path: '/models',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const MoreRoute = MoreRouteImport.update({
-  id: '/more',
-  path: '/more',
   getParentRoute: () => rootRouteImport,
 } as any)
 const NcertRoute = NcertRouteImport.update({
@@ -237,7 +231,6 @@ export interface FileRoutesByFullPath {
   '/calendar': typeof CalendarRoute
   '/leaderboard': typeof LeaderboardRoute
   '/models': typeof ModelsRoute
-  '/more': typeof MoreRoute
   '/ncert': typeof NcertRoute
   '/notifications': typeof NotificationsRoute
   '/owner': typeof OwnerRouteWithChildren
@@ -275,7 +268,6 @@ export interface FileRoutesByTo {
   '/calendar': typeof CalendarRoute
   '/leaderboard': typeof LeaderboardRoute
   '/models': typeof ModelsRoute
-  '/more': typeof MoreRoute
   '/ncert': typeof NcertRoute
   '/notifications': typeof NotificationsRoute
   '/practice': typeof PracticeRoute
@@ -313,7 +305,6 @@ export interface FileRoutesById {
   '/calendar': typeof CalendarRoute
   '/leaderboard': typeof LeaderboardRoute
   '/models': typeof ModelsRoute
-  '/more': typeof MoreRoute
   '/ncert': typeof NcertRoute
   '/notifications': typeof NotificationsRoute
   '/owner': typeof OwnerRouteWithChildren
@@ -353,7 +344,6 @@ export interface FileRouteTypes {
     | '/calendar'
     | '/leaderboard'
     | '/models'
-    | '/more'
     | '/ncert'
     | '/notifications'
     | '/owner'
@@ -391,7 +381,6 @@ export interface FileRouteTypes {
     | '/calendar'
     | '/leaderboard'
     | '/models'
-    | '/more'
     | '/ncert'
     | '/notifications'
     | '/practice'
@@ -428,7 +417,6 @@ export interface FileRouteTypes {
     | '/calendar'
     | '/leaderboard'
     | '/models'
-    | '/more'
     | '/ncert'
     | '/notifications'
     | '/owner'
@@ -467,7 +455,6 @@ export interface RootRouteChildren {
   CalendarRoute: typeof CalendarRoute
   LeaderboardRoute: typeof LeaderboardRoute
   ModelsRoute: typeof ModelsRoute
-  MoreRoute: typeof MoreRoute
   NcertRoute: typeof NcertRoute
   NotificationsRoute: typeof NotificationsRoute
   OwnerRoute: typeof OwnerRouteWithChildren
@@ -542,13 +529,6 @@ declare module '@tanstack/react-router' {
       path: '/models'
       fullPath: '/models'
       preLoaderRoute: typeof ModelsRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/more': {
-      id: '/more'
-      path: '/more'
-      fullPath: '/more'
-      preLoaderRoute: typeof MoreRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/ncert': {
@@ -782,7 +762,6 @@ const rootRouteChildren: RootRouteChildren = {
   CalendarRoute: CalendarRoute,
   LeaderboardRoute: LeaderboardRoute,
   ModelsRoute: ModelsRoute,
-  MoreRoute: MoreRoute,
   NcertRoute: NcertRoute,
   NotificationsRoute: NotificationsRoute,
   OwnerRoute: OwnerRouteWithChildren,
